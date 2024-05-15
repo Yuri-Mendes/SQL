@@ -102,12 +102,11 @@ alter VIEW v_fornec_geral  
 	UNION ALL 
 	SELECT 'f4',id_fornec,fornec FROM  fornecedores4 
 
-
-
 --Select na view v_fornec_geral
+select * from v_fornec_geral
+where origem='f2';
 
  INSERT  fornecedores4 VALUES  ('476','Argentine') ;
  INSERT  fornecedores4 VALUES  ('522','Venezuela') ;
 
-select * from v_fornec_geral
---where origem='f2';
+
