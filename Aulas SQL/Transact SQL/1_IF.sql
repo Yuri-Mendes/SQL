@@ -24,7 +24,7 @@ IF 1 = 1 AND 2 = 17 
 		PRINT 'Errado é FALSE';
 
 --Terceiro exemplo OR IF ELSE
-IF 1 <> 1 OR 2 = 17 
+IF 1 <> 1 OR 2 = 17
 	BEGIN  
 		 PRINT 'Correto é TRUE' 
 	END 
@@ -56,7 +56,7 @@ IF (SELECT Count(*)     
 -- Declaração da variável 
 	DECLARE @Idade INT; 
 -- Atribuição do valor a variável
-	SET @Idade=17; 
+	SET @Idade=65; 
 -- Se... for menor que 18 anos
 	IF @Idade < 18 
 		PRINT 'Menor que 18 anos'; 

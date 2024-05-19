@@ -17,7 +17,7 @@ WHILE (select  getdate()-@cont) <=getdate()
 DECLARE @CONT INT, 
         @TAB INT
 SET @CONT = 0
-SET @TAB = 3
+SET @TAB = 7
  
 WHILE(@CONT<=10)
 BEGIN  
@@ -31,8 +31,8 @@ END;
 DECLARE @val1 INT,  
         @val2 INT,
 		@mod INT
-SET @val1 = 1
-SET @val2 = 10
+SET @val1 = 12
+SET @val2 = 33
  
 WHILE(@val1<=@val2)
 BEGIN  

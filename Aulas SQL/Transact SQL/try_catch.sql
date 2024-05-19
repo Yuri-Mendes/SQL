@@ -1,6 +1,6 @@
 BEGIN TRY  
     -- Testando divisão por zero
-    SELECT 1/1;  
+    SELECT 1/0;  
 END TRY  
 BEGIN CATCH  
     SELECT  
