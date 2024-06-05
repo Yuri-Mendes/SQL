@@ -5,7 +5,7 @@ select top 5 * from uf
 select * from regiao
 
 
---AVG Retorna a mÈdia dos valores em um grupo.†Valores nulos s„o ignorados
+--AVG Retorna a m√©dia dos valores em um grupo.¬†Valores nulos s√£o ignorados
 select AVG(populacao) from senso;
 
 --AVG MEDIA POR ESTADO
@@ -24,7 +24,7 @@ GROUP BY B.regiao
 ORDER BY 2 desc
 
 
---MIN Retorna o valor mÌnimo na express„o. Pode ser seguido pela cl·usula OVER
+--MIN Retorna o valor m√≠nimo na express√£o. Pode ser seguido pela cl√°usula OVER
 select MIN(populacao) from senso;
 
 --MIN  POR ESTADO
@@ -42,7 +42,7 @@ ON A.cod_uf=B.cod_uf
 GROUP BY B.regiao, b.estado, a.cod_mun, a.nome_mun
 ORDER BY 5 asc
 
---MAX Retorna o valor m·ximo na express„o
+--MAX Retorna o valor m√°ximo na express√£o
 select MAX(populacao) from senso
 
 --MAX  POR ESTADO
@@ -59,8 +59,8 @@ ON A.cod_uf=B.cod_uf
 GROUP BY B.regiao
 ORDER BY 2 DESC
 
---SUM Retorna a soma de todos os valores ou somente os valores DISTINCT na express„o. 
---SUM pode ser usado exclusivamente com colunas numÈricas.Valores nulos s„o ignorados.
+--SUM Retorna a soma de todos os valores ou somente os valores DISTINCT na express√£o. 
+--SUM pode ser usado exclusivamente com colunas num√©ricas.Valores nulos s√£o ignorados.
 
 select SUM(populacao) from senso
 --183989711
@@ -81,7 +81,7 @@ ON A.cod_uf=B.cod_uf
 GROUP BY B.regiao
 ORDER BY 2 DESC
 
---COUNT Retorna o n˙mero de itens de um grupo
+--COUNT Retorna o n√∫mero de itens de um grupo
 
 select COUNT(*) from senso
 
@@ -106,7 +106,7 @@ ON A.cod_uf=b.cod_uf
 GROUP BY B.regiao
 ORDER BY 2 DESC
 
---usando varias funÁoes de agregacao
+--usando varias fun√ßoes de agregacao
 
 select avg(populacao)media_pop,
 	   min(populacao)minimo_pop,
@@ -144,18 +144,18 @@ ORDER BY 2;
 use curso;
 go
 
---STDEV Retorna o desvio padr„o estatÌstico de todos os valores da express„o especificada
+--STDEV Retorna o desvio padr√£o estat√≠stico de todos os valores da express√£o especificada
 
 select STDEV(populacao)  from senso;
 
---STDEVP Retorna o desvio padr„o estatÌstico para a populaÁ„o de todos os 
---valores na express„o especificada
+--STDEVP Retorna o desvio padr√£o estat√≠stico para a popula√ß√£o de todos os 
+--valores na express√£o especificada
 
 select STDEVP(populacao)  from senso;
 
---GROUPING Indica se uma express„o de coluna especificada em uma lista 
---GROUP BY È agregada ou n„o. GROUPING retorna 1 para agregada ou 0 
---para n„o agregada no conjunto de resultados.
+--GROUPING Indica se uma express√£o de coluna especificada em uma lista 
+--GROUP BY √© agregada ou n√£o. GROUPING retorna 1 para agregada ou 0 
+--para n√£o agregada no conjunto de resultados.
 
 select uf,sum(populacao) as populacao,
 GROUPING(uf) as grupo 
@@ -181,9 +181,9 @@ group by a.uf
 
 --GROUPING_ID
 /*
-… uma funÁ„o que calcula o nÌvel de agrupamento. 
+√â uma fun√ß√£o que calcula o n√≠vel de agrupamento. 
 GROUPING_ID pode ser usada apenas na lista SELECT <select>, 
-na cl·usula HAVING ou ORDER BY, quando GROUP BY for especificada.
+na cl√°usula HAVING ou ORDER BY, quando GROUP BY for especificada.
 */
 select b.regiao,a.uf,sum(a.populacao) populacao,
 GROUPING_ID(b.regiao,a.uf) as grupo 
@@ -193,15 +193,15 @@ on a.cod_uf=b.cod_uf
 group by rollup(b.regiao,a.uf);
 
 
---VAR Retorna a vari‚ncia estatÌstica de todos os valores da express„o especificada
+--VAR Retorna a vari√¢ncia estat√≠stica de todos os valores da express√£o especificada
 SELECT VAR(POPULACAO) FROM senso;
 
 SELECT UF,VAR(POPULACAO) FROM senso
 GROUP BY UF
 
 
---VARP Retorna a vari‚ncia estatÌstica para o preenchimento 
---de todos os valores da express„o especificada.
+--VARP Retorna a vari√¢ncia estat√≠stica para o preenchimento 
+--de todos os valores da express√£o especificada.
 SELECT VARP(POPULACAO) FROM senso
 
 SELECT UF,VARP(POPULACAO) FROM senso
@@ -214,30 +214,30 @@ GROUP BY UF
 --exemplo com Grouping
 use crm
 
-SELECT†codigo_pais,†††††††
-      †count(*)††††††††'Qtd',††††††††
-       Grouping(codigo_pais)†AS†'Grouping'†
+SELECT¬†codigo_pais,¬†¬†¬†¬†¬†¬†¬†
+      ¬†count(*)¬†¬†¬†¬†¬†¬†¬†¬†'Qtd',¬†¬†¬†¬†¬†¬†¬†¬†
+       Grouping(codigo_pais)¬†AS¬†'Grouping'¬†
 from cliente
-GROUP††BY†codigo_pais†WITH†rollup
+GROUP¬†¬†BY¬†codigo_pais¬†WITH¬†rollup
 
 --exemplo
-SELECT†a.nome_montadora,†††††††
-      †count(*)††††††††'Qtd',††††††††
-       Grouping(a.nome_montadora)†AS†'Grouping'†
+SELECT¬†a.nome_montadora,¬†¬†¬†¬†¬†¬†¬†
+      ¬†count(*)¬†¬†¬†¬†¬†¬†¬†¬†'Qtd',¬†¬†¬†¬†¬†¬†¬†¬†
+       Grouping(a.nome_montadora)¬†AS¬†'Grouping'¬†
 from montadora a
  inner join carro_montadora b
  on a.id_montadora=b.id_montadora
-GROUP††BY†a.nome_montadora WITH†rollup
+GROUP¬†¬†BY¬†a.nome_montadora WITH¬†rollup
 
 --exemplo
-SELECT†a.nome_montadora,b.nome_carro,†††††††
-      †count(*)††††††††'Qtd',††††††††
-       Grouping(a.nome_montadora)†AS†'Grouping'†
+SELECT¬†a.nome_montadora,b.nome_carro,¬†¬†¬†¬†¬†¬†¬†
+      ¬†count(*)¬†¬†¬†¬†¬†¬†¬†¬†'Qtd',¬†¬†¬†¬†¬†¬†¬†¬†
+       Grouping(a.nome_montadora)¬†AS¬†'Grouping'¬†
 from montadora a
  inner join carro_montadora b
  on a.id_montadora=b.id_montadora
  where a.nome_montadora in ('Toyota','Alfa Romeo')
-GROUP††BY†a.nome_montadora,b.nome_carro† WITH†rollup;
+GROUP¬†¬†BY¬†a.nome_montadora,b.nome_carro¬† WITH¬†rollup;
 
 
 --trazendo o nome cidade com maior populacao em cada estado -- UTILIZANDO SUBSELECT COM JOIN
@@ -271,3 +271,9 @@ FROM senso a
 GROUP BY a.cod_uf, a.nome_mun, a.populacao
 HAVING populacao = (SELECT min(populacao) FROM senso WHERE cod_uf = a.cod_uf)
 ORDER BY a.populacao desc
+
+select department_id,sum(salary)
+from employees
+group by department_id
+having sum(salary) > 5000
+order by department_id desc
