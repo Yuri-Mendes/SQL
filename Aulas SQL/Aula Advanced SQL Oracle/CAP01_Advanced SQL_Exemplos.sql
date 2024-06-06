@@ -60,8 +60,7 @@ SELECT employee_id, job_id
 FROM   employees
 UNION
 SELECT employee_id, job_id
-FROM   job_history
-order by job_id;
+FROM   job_history;
 
 --UNIÃO TOTAL
 SELECT employee_id, job_id
@@ -76,9 +75,6 @@ FROM   employees
 INTERSECT
 SELECT employee_id, job_id
 FROM   job_history;
-
-select job_id from job_history
-where employee_id = 176;
 
 -- SUBTRAÇÃO
 SELECT employee_id, job_id
@@ -138,8 +134,6 @@ SELECT employee_id, first_name, last_name, email,
        salary, commission_pct
 FROM employees
 WHERE employee_id=110;
-
-select * from employees_retired
 -----------------------------------------------------------------
 --Instruções DML – Data Manipulation Language – EXEMPLOS (AVANÇADO) 
 --UPDATE
@@ -164,7 +158,6 @@ WHERE  department_id =
                  FROM   departments
                  WHERE  department_name  = 'Retail Sales');
 
-select * from departments WHERE  department_name  = 'Retail Sales'
 -----------------------------------------------------------------
 drop table SAL_HIST_DEPT;
  CREATE TABLE SAL_HIST_DEPT 
@@ -177,7 +170,7 @@ drop table MGR_HIST_DEPT ;
   CREATE TABLE MGR_HIST_DEPT 
    (	EMPID NUMBER(6), 
 	MANAGER NUMBER(6), 
-	SAL NUMBER(8,2)
+	SAL NUMBER(8,2)''
    );
    
 --INSERT Incondicional: ALL clausula_inserção 
@@ -188,13 +181,11 @@ INSERT  ALL
 INTO sal_hist_dept VALUES(EMP_ID,HIREDATE,SALARY) 
 INTO mgr_hist_dept VALUES(EMP_ID,MANAGER,SALARY)
 SELECT employee_id EMP_ID, 
-       hire_date   HIREDATE,
+--       hire_date   HIREDATE,
        salary, 
        manager_id  MANAGER 
 FROM  employees   
 WHERE department_id = 90 ; 
-
-select * from SAL_HIST_DEPT
 -----------------------------------------------------------------
 --INSERT Condicional: clasula_insercao_condicional 
 
@@ -216,7 +207,6 @@ INSERT
     FROM  employees   
     WHERE department_id = 90 ;    
 
-select * from SAL_HIST_DEPT
 -----------------------------------------------------------------
 --INSERT Condicional: FIRST
 drop table highest_sal;
@@ -238,8 +228,8 @@ drop table hiredate_hist;
 create table hiredate_hist
 	(deptid number(4),
 	hiredate date);
-    
-INSERT ALL
+
+INSERT FIRST
   WHEN SUM_SALARY  > 25000 THEN
     INTO highest_sal VALUES(DEPT_ID, SUM_SALARY)
   WHEN HIREDATE like ('%00%') THEN
@@ -253,11 +243,6 @@ INSERT ALL
          MAX(hire_date) HIREDATE
   FROM   employees
   group by department_id;
-  
-select * from highest_sal;
-select * from hiredate_hist_00;
-select * from hiredate_hist_99;
-select * from hiredate_hist;
 
 /*
 10	4400	17/09/87 -3
@@ -305,8 +290,6 @@ INSERT INTO SALES_DATA
 VALUES (176,'Meg', 6, 2000,3000,4000,5000,6000);
 commit;
 
-select  * from SALES_DATA;
-
 INSERT ALL
   INTO sales_informations 
   VALUES (emp_id, last_name, week_id, MONDAY)
@@ -327,9 +310,6 @@ INSERT ALL
          THURSDAY,
          FRIDAY 
   FROM sales_data;
-  
-  select  * from sales_informations;
-  
 -----------------------------------------------------------------
 --Instrução Exemplo 
 /*Caso a linha exista será executada uma atualização senão será executada uma inserção caso a linha seja nova. */
@@ -370,6 +350,8 @@ WHEN NOT MATCHED THEN
    values (s2.id, s2.item, s2.price);
 
 select * from catalog1;
+
+commit;
 -----------------------------------------------------------------
 --AGRUPAMENTO ROLLUP-Exemplo 
 /* No exemplo  serão exibidos os totais de salários agrupados por cargos 
@@ -423,7 +405,7 @@ FROM     employees
 WHERE    department_id >= 50
 GROUP BY CUBE(department_id, job_id);  
 -----------------------------------------------------------------
---Consultas Hierárquicas-Exemplos 
+--Consultas Hierárquicas-Exemplos -- CHEFE - PK / SUBORDINADO - FK
 --ANTES UM SELF JOIN..
 SELECT sup.last_name    sup,
        sup.job_id       job_supuerior,
@@ -437,7 +419,7 @@ ON(sup.employee_id = sub.manager_id);
 SELECT employee_id, last_name, job_id, manager_id
 FROM   employees
 START  WITH  last_name = 'Kochhar'
-CONNECT BY PRIOR manager_id = employee_id ;
+CONNECT BY PRIOR employee_id = manager_id ;
 
 --�?rvore  percorrida de cima para baixo:
 SELECT  last_name||' Responde para '|| 
