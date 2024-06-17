@@ -35,3 +35,9 @@ ORDER BY 2 DESC;
 select department_id, salary from employees
 order by salary desc
 
+SELECT last_name, MAX(salary) 
+FROM employees
+GROUP BY last_name
+ORDER BY 2 DESC
+FETCH FIRST 10 rows only;
+
