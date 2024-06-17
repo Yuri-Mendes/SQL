@@ -41,3 +41,15 @@ GROUP BY last_name
 ORDER BY 2 DESC
 FETCH FIRST 10 rows only;
 
+--maiores salários por sobrenome
+SELECT last_name, MAX(salary) 
+FROM employees
+GROUP BY last_name
+ORDER BY 2 DESC;
+
+--top 10 maiores salários por sobrenome
+SELECT last_name, MAX(salary) 
+FROM employees
+GROUP BY last_name
+ORDER BY 2 DESC
+FETCH FIRST 10 rows only;
